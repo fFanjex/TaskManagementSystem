@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  spring-app:
+    image: openjdk:17-jdk-slim
+    container_name: management-app
+    build: .
+    ports:
+      - "9093:9093"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/management
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=15987
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_SHOW_SQL=true
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: postgres:latest
+    container_name: management-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=15987
+      - POSTGRES_DB=management
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@domain.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+    driver: local

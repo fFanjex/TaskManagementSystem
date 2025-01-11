@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр проектов</title>
+    <link rel="stylesheet" href="/view-projects.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/about">О нас</a></li>
+            <li><a href="/services">Начало работы</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Просмотр всех проектов</h1>
+    <p>Здесь вы можете просмотреть все существующие проекты.</p>
+
+    <div>
+        <table class="projects-table">
+            <thead>
+            <tr>
+                <th>Название проекта</th>
+                <th>Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="project : ${projects}">
+                <td th:text="${project.name}">Название проекта</td>
+                <td th:text="${project.description}">Описание проекта</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/" class="secondary-btn">На главную</a>
+</main>
+
+<footer>
+    <p>&copy; 2025 Management. Все права защищены.</p>
+</footer>
+</body>
+</html>
