@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменить проект</title>
+    <link rel="stylesheet" href="/edit-project.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/about">О нас</a></li>
+            <li><a href="/services">Начало работы</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Изменить проект</h1>
+    <form action="#" th:action="@{/edit-project/{id}(id=${project.id})}" th:object="${project}" method="post">
+        <div class="form-group">
+            <label for="name">Название проекта:</label><br>
+            <input type="text" id="name" name="name" th:field="*{name}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание проекта:</label><br>
+            <textarea id="description" name="description" th:field="*{description}" rows="5"></textarea>
+        </div>
+
+        <button type="submit" class="primary-btn">Сохранить изменения</button>
+        <a href="/projects" class="secondary-btn">Отмена</a>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2025 Management. Все права защищены.</p>
+</footer>
+</body>
+</html>
