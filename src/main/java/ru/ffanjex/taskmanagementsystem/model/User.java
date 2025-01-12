@@ -1,7 +1,7 @@
 package ru.ffanjex.taskmanagementsystem.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -11,11 +11,14 @@ public class User {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRole> roles;
 
     public Integer getId() {
         return id;
@@ -41,4 +44,11 @@ public class User {
         this.password = password;
     }
 
+    public List<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
+    }
 }

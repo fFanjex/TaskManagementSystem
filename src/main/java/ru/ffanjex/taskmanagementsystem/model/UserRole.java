@@ -1,7 +1,6 @@
 package ru.ffanjex.taskmanagementsystem.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -46,5 +45,4 @@ public class UserRole {
     public void setRole(Role role) {
         this.role = role;
     }
-
 }

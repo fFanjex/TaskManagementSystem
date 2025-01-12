@@ -1,7 +1,7 @@
 package ru.ffanjex.taskmanagementsystem.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -13,6 +13,9 @@ public class Role {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserRole> userRoles;
 
     public Integer getId() {
         return id;
@@ -30,4 +33,11 @@ public class Role {
         this.name = name;
     }
 
+    public List<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(List<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
 }

@@ -6,4 +6,5 @@ import ru.ffanjex.taskmanagementsystem.model.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Integer> {
+    Role findByName(String name);
 }
