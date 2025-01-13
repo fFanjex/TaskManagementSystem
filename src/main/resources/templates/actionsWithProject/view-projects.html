@@ -35,7 +35,7 @@
                 <td th:text="${project.name}">Название проекта</td>
                 <td th:text="${project.description}">Описание проекта</td>
                 <td>
-                    <a th:href="@{'/about-project/' + ${project.id}}" class="action-btn edit-btn">Подробнее</a>
+                    <a th:href="@{'/view-tasks/' + ${project.id}}" class="action-btn edit-btn">Подробнее</a>
                     <a th:href="@{'/edit-project/' + ${project.id}}" class="action-btn edit-btn">Изменить</a>
                     <a th:href="@{'/delete-project/' + ${project.id}}" class="action-btn delete-btn"
                        onclick="return confirm('Вы уверены, что хотите удалить проект?')">Удалить</a>

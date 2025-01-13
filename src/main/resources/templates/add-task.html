@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить задачу</title>
+    <link rel="stylesheet" href="/add-task.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/view-projects">Все проекты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Добавить задачу</h1>
+    <form th:action="@{/add-task}" method="post" class="add-task-form">
+        <div class="form-group">
+            <label for="taskName">Название задачи:</label>
+            <input type="text" id="taskName" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="taskDescription">Описание задачи:</label>
+            <textarea id="taskDescription" name="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="taskCompleted">Статус:</label>
+            <select id="taskCompleted" name="completed">
+                <option value="false">Не выполнена</option>
+                <option value="true">Выполнена</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn submit-btn">Добавить</button>
+    </form>
+
+    <a href="/view-projects" class="secondary-btn">Вернуться к проектам</a>
+</main>
+
+<footer>
+    <p>&copy; 2025 Management. Все права защищены.</p>
+</footer>
+</body>
+</html>

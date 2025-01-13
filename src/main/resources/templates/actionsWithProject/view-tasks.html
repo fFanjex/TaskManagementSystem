@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи проекта</title>
+    <link rel="stylesheet" href="/view-tasks.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/view-projects">Все проекты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1>Задачи проекта: <span th:text="${project.name}">Название проекта</span></h1>
+    <p th:text="${project.description}">Описание проекта</p>
+
+    <div>
+        <table class="tasks-table">
+            <thead>
+            <tr>
+                <th>Название задачи</th>
+                <th>Описание</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task : ${tasks}">
+                <td th:text="${task.name}">Название задачи</td>
+                <td th:text="${task.description}">Описание задачи</td>
+                <td>
+                    <span th:if="${task.completed}" class="status completed">Выполнена</span>
+                    <span th:if="!${task.completed}" class="status not-completed">Не выполнена</span>
+                </td>
+                <td>
+                    <form th:action="@{'/toggle-task-status/' + ${task.id}}" method="post" style="display: inline-block;">
+                        <input type="checkbox" th:checked="${task.completed}" onchange="this.form.submit()">
+                    </form>
+                    <a href="/edit-task/${task.id}" class="btn edit-btn">Изменить</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="/add-task" class="add-task-btn">Добавить задачу</a>
+    </div>
+
+    <a href="/view-projects" class="secondary-btn">Вернуться к проектам</a>
+</main>
+
+<footer>
+    <p>&copy; 2025 Management. Все права защищены.</p>
+</footer>
+</body>
+</html>

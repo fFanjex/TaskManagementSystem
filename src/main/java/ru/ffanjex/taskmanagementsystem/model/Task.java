@@ -1,29 +1,26 @@
 package ru.ffanjex.taskmanagementsystem.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
 
-    @Column(name = "status", length = 50)
-    private String status;
+    @Column(name = "completed", nullable = false)
+    private boolean completed;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
 
@@ -35,12 +32,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -51,12 +48,12 @@ public class Task {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public Project getProject() {
@@ -67,4 +64,7 @@ public class Task {
         this.project = project;
     }
 
+    public Integer getProjectId() {
+        return project != null ? project.getId() : null;
+    }
 }

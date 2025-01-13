@@ -3,6 +3,9 @@ package ru.ffanjex.taskmanagementsystem.model;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "projects")
 public class Project {
@@ -16,6 +19,17 @@ public class Project {
 
     @Column(name = "description", length = Integer.MAX_VALUE)
     private String description;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<>();
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
     public Integer getId() {
         return id;
